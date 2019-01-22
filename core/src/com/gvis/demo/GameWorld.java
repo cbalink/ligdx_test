@@ -7,7 +7,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
-import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
@@ -28,10 +27,6 @@ public class GameWorld {
     private PerspectiveCamera cam;
     private Engine engine;
     private PhysicsSystem physicsSystem;
-    private AssetManager assets;
-
-    private Model wall, wholeFloor, zero;
-    private Model marioBox;
 
 
     public GameWorld() {
@@ -51,8 +46,9 @@ public class GameWorld {
     }
 
     private void loadMap() {
-
+        Gdx.app.log(Gdx.files.getLocalStoragePath(),"");
         FileHandle handle = Gdx.files.local("map.txt");
+
         MapFileParser parser = new MapFileParser(handle);
         addEntities(parser.getEntities());
     }
@@ -118,9 +114,5 @@ public class GameWorld {
     public void dispose() {
         physicsSystem.dispose();
         batch.dispose();
-        wall.dispose();
-        wholeFloor.dispose();
-        zero.dispose();
-        marioBox.dispose();
     }
 }
